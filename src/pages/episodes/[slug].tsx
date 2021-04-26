@@ -1,9 +1,17 @@
+//import { usePlayer } from '../../contexts/PlayerContext'
+
 import { GetStaticPaths, GetStaticProps } from "next";
-import { useRouter } from "next/router";
 import { api } from "../../services/api";
 import { convertDurationToTimeString } from "../../utils/convertDurationToTimeString";
 import { format, parseISO } from "date-fns";
 import { ptBR } from "date-fns/locale";
+
+import Head   from 'next/head'
+import Link   from 'next/link'
+import Image  from 'next/image'
+
+import styles from './episode.module.scss'
+import React from "react";
 
 type Episode = {
     id: string,
@@ -23,23 +31,83 @@ type EpisodeProps ={
 
 export default function Episoode({episode}: EpisodeProps){
 
+    //const { play } = usePlayer()
+
+   // const imgSize = 24
+   // const arrowBackLoader = () => `/icons/arrow-back.svg`
+  //  const playLoader      = () => `/icons/play.svg`
+
     return(
-        <h1>{episode.title}</h1>
+    <div className={styles.container}>
+        <Head>
+            <title>{episode.title} | Podcastr</title>
+        </Head>
+        <div className={styles.thumbnailContainer}>
+            <Link href={'/'}>
+                <button type="button" >
+                    <img src="/arrow-left.svg" alt="Voltar"/>    
+
+                </button>
+            </Link>
+            <Image
+                src={episode.thumbnail}
+                objectFit='cover'
+                alt='Thumbnail'
+                width={700}
+                height={160}
+            />
+            <button type="button" /*onClick={() => play(episode)}*/>
+               <img src="/play.svg" alt="Tocar episodio"/>
+                
+            </button>
+        </div>
+
+
+    
+        <header>
+            <h1>{episode.title}</h1>
+            <span>{episode.members}</span>
+            <span>{episode.publishedAt}</span>
+            <span>{episode.durationAsString}</span>
+        </header>
+
+    <div
+        className={styles.description}
+        dangerouslySetInnerHTML={{ __html: episode.description }}
+    />
+    </div>
     )
 }
 
+// ---- SSG Dynamic --------
 export const getStaticPaths: GetStaticPaths = async () => {
+    const {data} = await api.get('episodes', {
+        params: {
+          _limit: 2,
+          _sort: 'published_at',
+          _order: 'desc'
+        }
+    })
+
+        const paths = data.map(episode => {
+            return{
+                params:{
+                    slug: episode.id
+                }
+            }
+        })
     return{
-        paths: [],
+        paths, 
         fallback: 'blocking'
     }    
 }
 
+//---- SSG Request ------
 export const getStaticProps: GetStaticProps = async (ctx) => {
     
     const {slug } = ctx.params;
 
-    const { data } = await api.get(`/episodes ${slug}`) 
+    const { data } = await api.get(`/episodes/${slug}`) 
     
 
     

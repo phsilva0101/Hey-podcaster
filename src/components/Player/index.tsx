@@ -26,23 +26,23 @@ export function Player(){
 
                 <div className={styles.buttonsController}>
                     <button  type="button">
-                        <img src="shuffle.svg" alt="Aleatorio"/>    
+                        <img src="/shuffle.svg" alt="Aleatorio"/>    
                     </button>
 
                     <button type="button">
-                        <img src="play-previous.svg" alt="Tocar anterior"/>
+                        <img src="/play-previous.svg" alt="Tocar anterior"/>
                     </button>
 
                     <button className={styles.play} type="button">
-                        <img  src="play.svg" alt="Play"/>
+                        <img  src="/play.svg" alt="Play"/>
                     </button>
 
                     <button type="button">
-                        <img src="play-next.svg" alt="Tocar proxima"/>
+                        <img src="/play-next.svg" alt="Tocar proxima"/>
                     </button>
 
                     <button>
-                        <img src="repeat.svg" alt="Repetir"/>
+                        <img src="/repeat.svg" alt="Repetir"/>
                     </button>
 
                 </div>
