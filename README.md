@@ -156,6 +156,11 @@ yarn add sass
 ```bash
 yarn add date-fns
 ```
+
+## Installing RAACT RC-Slider Library to Make the Player Slider
+```Bash
+yarn add rc-slider
+```
 ----------------------------------------------------------------------------------------------------
 
 ## Learn More

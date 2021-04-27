@@ -1,5 +1,5 @@
 .playerContainer{
-    width: 19.5rem;
+    width: 23.5rem;
     height: 100vh;
     background: var(--purple-800);
     padding: 3rem 4rem;
@@ -53,6 +53,30 @@
     
 }
 
+.currentEpisode{
+   text-align: center;
+
+   img{
+       border-radius: 1.5rem;
+   }
+
+   strong{
+       display: block;
+       margin-top: 2rem;
+       font: 600 1.25rem Lexend, sans-serif;
+       line-height: 1.75rem;
+
+   }
+
+   span{
+       display: block;
+       margin-top: 1rem;
+       opacity: 0.7;
+       line-height: 1.5rem
+   }
+    
+}
+
 .progress{
     display: flex;
     align-items: center;
@@ -85,6 +109,16 @@
 
         border: 0;
         font-size: 0;
+        transition: 0.2s;
+
+
+        &:disabled{
+            cursor: default;
+        }
+
+        &:hover:not(:disabled){
+            filter: brightness(0.7)
+        }
 
         &.play{
             width: 4rem;
@@ -93,8 +127,11 @@
             
             background: var(--purple-300);
             border-radius: 1rem;
+
     
-        
+            &:hover:not(:disabled){
+                filter: brightness(0.95);
+            }
             
         }
        
